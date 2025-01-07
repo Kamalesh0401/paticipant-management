@@ -214,7 +214,7 @@ const FileUploader = () => {
 
 
     const handleAddFileInput = () => {
-        dispatch(setShowModal(true));
+        setShowModal(true);
     };
 
     const handleSaveFileName = () => {
@@ -227,11 +227,11 @@ const FileUploader = () => {
                 progress: 0,
                 files: [], // Added to support multiple files under the same name
             };
-            dispatch(addDocument(newDocument));
             setFileInputs([
                 ...fileInputs,
                 newDocument,
             ]);
+            dispatch(addDocument(newDocument));
             dispatch(setActiveDocument({ participantId: activeParticipant.id, documentId: newDocument.id }));
             setFileName("");
             setShowModal(false);
@@ -254,7 +254,7 @@ const FileUploader = () => {
                             </div>
                         ))}
                         <button className="add-file-btn" onClick={handleAddFileInput}>
-                            + Add File
+                            + Add File Name
                         </button>
                     </div>
 
@@ -269,7 +269,7 @@ const FileUploader = () => {
                                 <button
                                     type="button"
                                     className="close-btn"
-                                    onClick={() => dispatch(setShowModal(false))}
+                                    onClick={() => setShowModal(false)}
                                 >
                                     X
                                 </button>
@@ -284,7 +284,7 @@ const FileUploader = () => {
                                     <button onClick={handleSaveFileName} className="save-btn">
                                         Save
                                     </button>
-                                    <button onClick={() => dispatch(setShowModal(false))} className="cancel-btn">
+                                    <button onClick={() => setShowModal(false)} className="cancel-btn">
                                         Cancel
                                     </button>
                                 </div>

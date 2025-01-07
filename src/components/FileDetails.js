@@ -114,7 +114,7 @@ const FileDetails = ({ activeParticipant }) => {
                     dispatch(updateFile({ id, changes: { uploading: true, progress } }));
                 } else {
                     clearInterval(interval);
-                    dispatch(updateFileInput({ id, changes: { uploading: false } }));
+                    dispatch(updateFile({ id, changes: { uploading: false } }));
                 }
             }, 500);
         }
@@ -153,7 +153,7 @@ const FileDetails = ({ activeParticipant }) => {
                         )}
                         <button
                             className="remove-input-btn"
-                            onClick={() => dispatch(removeFileInput(input.id))}
+                            onClick={() => dispatch(removeFile(input.id))}
                         >
                             Cancel
                         </button>
