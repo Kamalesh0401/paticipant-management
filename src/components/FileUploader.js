@@ -240,7 +240,7 @@ const FileUploader = () => {
 
     return (
         <div className="file-uploader">
-            {activeParticipant ? (
+            {(activeParticipant) ? (
                 <>
                     {/* Left Sidebar (Tabs) */}
                     <div className="file-tabs">

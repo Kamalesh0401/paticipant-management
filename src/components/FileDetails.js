@@ -92,13 +92,14 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload, faClose, faTimes, faCross } from '@fortawesome/free-solid-svg-icons';
 
-const FileDetails = ({ activeParticipant }) => {
+const FileDetails = ({ activeParticipant, activeDocumentId }) => {
     const dispatch = useDispatch();
     const [fileInputs, setFileInputs] = useState(activeParticipant.documents || []);
-    const { participants, activeParticipantIndex, activeDocumentId } = useSelector(
+    const { participants, activeParticipantIndex } = useSelector(
         (state) => state.participants
     );
-
+    console.log("fileInputs in File details : ", fileInputs);
+    console.log("fileInputs activeDocumentId : ", activeDocumentId);
     const handleFileChange = (id, e) => {
         const file = e.target.files[0];
         dispatch(addFile({ participantId: activeParticipant.id, documentId: activeDocumentId, file: file }));
@@ -106,7 +107,6 @@ const FileDetails = ({ activeParticipant }) => {
 
     const handleUploadFile = (id, file) => {
         if (file && activeParticipant) {
-            // Simulate upload progress
             let progress = 0;
             const interval = setInterval(() => {
                 if (progress < 100) {
