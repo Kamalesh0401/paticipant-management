@@ -184,7 +184,7 @@
 
 // export default FileUploader;
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
     addParticipant,
@@ -198,6 +198,8 @@ import {
     setActiveDocument
 } from '../redux/participantsSlice';
 import FileDetails from "./FileDetails";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 import "./FileUploader.css";
 
 const FileUploader = () => {
@@ -211,11 +213,16 @@ const FileUploader = () => {
     const [fileInputs, setFileInputs] = useState(activeParticipant.documents || []);
     const [fileName, setFileName] = useState("");
     const [showModal, setShowModal] = useState(false);
+    const inputRef = useRef();
 
 
     const handleAddFileInput = () => {
         setShowModal(true);
     };
+
+    const setFocus = () => {
+        inputRef.current.focus()
+    }
 
     const handleSaveFileName = () => {
         if (fileName) {
@@ -235,6 +242,9 @@ const FileUploader = () => {
             dispatch(setActiveDocument({ participantId: activeParticipant.id, documentId: newDocument.id }));
             setFileName("");
             setShowModal(false);
+        } else {
+            alert("File name cannot be empty!");
+            setFocus();
         }
     };
 
@@ -266,12 +276,8 @@ const FileUploader = () => {
                         <div className="file-modal-overlay">
                             <div className="file-modal-content">
                                 <h3>Add File Name</h3>
-                                <button
-                                    type="button"
-                                    className="close-btn"
-                                    onClick={() => setShowModal(false)}
-                                >
-                                    X
+                                <button type="button" className="close-btn" onClick={() => setShowModal(false)}>
+                                    <FontAwesomeIcon icon={faTimes} className="me-0" />
                                 </button>
                                 <input
                                     type="text"
@@ -279,6 +285,7 @@ const FileUploader = () => {
                                     onChange={(e) => setFileName(e.target.value)}
                                     placeholder="Enter file name"
                                     className="file-modal-input"
+                                    ref={inputRef}
                                 />
                                 <div className="file-modal-buttons">
                                     <button onClick={handleSaveFileName} className="save-btn">

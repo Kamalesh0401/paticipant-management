@@ -68,6 +68,8 @@ const participantsSlice = createSlice({
     setActiveDocument: (state, action) => {
       const { participantId, documentId } = action.payload;
       const participant = state.participants.find(p => p.id === participantId);
+      console.log("setActiveDocument state", state);
+      console.log("setActiveDocument participant.documents", participant.documents);
       if (participant && participant.documents.some(doc => doc.id === documentId)) {
         participant.activeDocumentId = documentId;
         if (state.participants[state.activeParticipantIndex].id === participantId) {
@@ -187,7 +189,7 @@ export default participantsSlice.reducer;
 // // Access active document in your component
 // const { activeDocumentId } = useSelector(state => state.participants);
 // // or for specific participant
-// const participant = useSelector(state => 
+// const participant = useSelector(state =>
 //     state.participants.participants.find(p => p.id === participantId)
 // );
 // const activeDoc = participant.documents.find(d => d.id === participant.activeDocumentId);
