@@ -66,7 +66,9 @@ const FileUploader = () => {
 
     const handleFileChange = (rawFile) => {
         //const rawFile = e.target.files[0];
+        console.log("handleFileChange addFile if: ", rawFile);
         if (rawFile) {
+            console.log("handleFileChange addFile : ", rawFile);
             const file = {
                 name: rawFile.name,
                 size: rawFile.size,

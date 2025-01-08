@@ -29,13 +29,13 @@ const FileDetails = () => {
             let progress = 0;
             const interval = setInterval(() => {
                 if (progress < 100) {
-                    progress += 10;
+                    progress += 3;
                     dispatch(updateFile({ participantId: activeParticipant.id, documentId: activeDocumentId, fileId: id, changes: { uploading: true, status: 'uploading', progress } }));
                 } else {
                     clearInterval(interval);
                     dispatch(updateFile({ participantId: activeParticipant.id, documentId: activeDocumentId, fileId: id, changes: { uploading: false, status: 'completed' } }));
                 }
-            }, 500);
+            }, 100);
         }
     }
 
@@ -50,7 +50,7 @@ const FileDetails = () => {
                             </div>
                             <div className="file-details">
                                 {/* Progress Bar */}
-                                <div className="file-progress-container">
+                                {file.status !== "completed" && <div className="file-progress-container">
                                     <div className="file-progress-bar">
                                         <div
                                             className="file-progress"
@@ -58,17 +58,17 @@ const FileDetails = () => {
                                         >
                                         </div>
                                     </div>
-                                    {file.progress >= 10 && (
+                                    {(file.progress >= 10 && file.progress <= 100) && (
                                         <span className="file-progress-end">{file.progress}%</span>
                                     )}
-                                </div>
+                                </div>}
 
                                 <div className="file-name">{file.name || "Untitled File"}</div>
                                 <div className="file-info">
-                                    <span>{(file.size / 1024).toFixed(2)} KB</span> | <span>{file.type}</span> |{" "}
+                                    <span>{(file.size / 1024).toFixed(2)} KB</span> | <span>{file.type}</span> | {" "}
                                     <strong>
-                                        <span className={`${file.status}`}>
-                                            {file.status !== "completed" ? file.status + "..." : file.status}
+                                        <span className={`status-text ${file.status}`}>
+                                            {file.status === "uploading" ? `  uploading${file.status === "uploading" ? "..." : ""}` : file.status}
                                         </span>
                                     </strong>
                                 </div>

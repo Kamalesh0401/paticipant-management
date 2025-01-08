@@ -149,18 +149,6 @@
     cursor: pointer;
 }
 
-.pending {
-    color: red;
-}
-
-.completed {
-    color: green;
-}
-
-.uploading {
-    color: blue;
-}
-
 /* Responsive design */
 @media (max-width: 768px) {
     .file-item {
@@ -172,5 +160,70 @@
     .file-actions {
         width: 100%;
         justify-content: space-between;
+    }
+}
+
+/* Base styles for status text */
+.status-text {
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+/* For the pending status (red color and shaking effect) */
+.pending {
+    color: #ff6b6b;
+    animation: shake 0.5s ease-in-out infinite;
+}
+
+/* For the completed status (green color and smooth transition) */
+.completed {
+    color: #28a745;
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+/* For the uploading status (blue color and loading animation) */
+.uploading {
+    color: #007bff;
+    display: inline-block;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Shaking animation for pending status */
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(5px);
+    }
+}
+
+/* Pulse animation for uploading status */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
     }
 }

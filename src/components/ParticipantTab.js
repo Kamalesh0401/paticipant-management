@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import "./ParticipantTab.css";
 import FileUploader from "./FileUploader";
 import AddParticipantModal from "./AddParticipantModal";
@@ -35,15 +35,16 @@ const ParticipantTab = () => {
     };
 
     return (
-        <div className="participant-management mt-4 p-5">
+        <div className="mt-4 p-5">
             {/* Add Participant Button */}
             <div className="d-flex justify-content-between mb-3">
                 <h2>Participant management</h2>
                 <button
-                    className="btn btn-primary"
+                    className="add-participant-btn"
                     onClick={() => setIsModalOpen(true)}
                 >
-                    + Add Participant
+                    <FontAwesomeIcon icon={faUserPlus} className="me-2 add-icon" />
+                    Add Participant
                 </button>
             </div>
 
@@ -52,7 +53,7 @@ const ParticipantTab = () => {
                 {participants.map((participant, index) => (
                     <div
                         key={participant.id}
-                        className={`${index === 0 ? "ms-2" : ""} tab-item ${activeParticipantIndex === index ? "active-tab" : ""
+                        className={`${index === 0 ? "ms-2" : ""} mt-1 mb-1 tab-item ${activeParticipantIndex === index ? "active-tab" : ""
                             }`}
                         onClick={() => handleSwitchTab(index)}
                     >
@@ -64,24 +65,22 @@ const ParticipantTab = () => {
                                 handleDeleteParticipant(participant.id);
                             }}
                         >
-                            <FontAwesomeIcon icon={faTrash} className="me-0" />
+                            <FontAwesomeIcon icon={faTimes} />
                         </button>
                     </div>
                 ))}
-                {participants.length === 0 && <p>No participants available. Add one to get started!</p>}
+                {participants.length === 0 && <p className="ms-2">No participants available. Add one to get started!</p>}
             </div>
 
             {/* Active Participant Content */}
-            <div className="active-tab-content mt-4">
-                {participants.length > 0 ? (
-                    <>
-                        <h3 className="mb-3">{participants[activeParticipantIndex].name}</h3>
-                        <FileUploader />
-                    </>
-                ) : (
-                    <p>Add a participant to display their content here.</p>
-                )}
-            </div>
+
+            {participants.length > 0 && (
+                <div className="active-tab-content mt-4">
+                    <h3 className="mb-3">{participants[activeParticipantIndex].name}</h3>
+                    <FileUploader />
+                </div>
+            )}
+
 
             {participants.length !== 0 &&
                 <div className="mt-5">

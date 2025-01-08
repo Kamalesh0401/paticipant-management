@@ -65,7 +65,6 @@ const participantsSlice = createSlice({
       }
     },
     setActiveDocument: (state, action) => {
-      console.log("Before update:", state);
       const { participantId, documentId } = action.payload;
       const participant = state.participants.find(p => p.id === participantId);
       if (participant && participant.documents.some(doc => doc.id === documentId)) {
@@ -74,7 +73,6 @@ const participantsSlice = createSlice({
           state.activeDocumentId = documentId;
         }
       }
-      console.log("After update:", state);
     },
     removeDocument: (state, action) => {
       const { participantId, documentId } = action.payload;
