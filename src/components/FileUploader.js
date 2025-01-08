@@ -48,7 +48,7 @@ const FileUploader = () => {
                 name: fileName,
                 uploading: false,
                 progress: 0,
-                files: [], // Added to support multiple files under the same name
+                files: [],
             };
             setFileInputs([
                 ...fileInputs,
@@ -65,7 +65,6 @@ const FileUploader = () => {
     };
 
     const handleFileChange = (rawFile) => {
-        //const rawFile = e.target.files[0];
         console.log("handleFileChange addFile if: ", rawFile);
         if (rawFile) {
             console.log("handleFileChange addFile : ", rawFile);
@@ -82,7 +81,6 @@ const FileUploader = () => {
         <div className="file-uploader">
             {(activeParticipant) ? (
                 <>
-                    {/* Left Sidebar (Tabs) */}
                     <div className="file-tabs">
                         {fileInputs.map((input) => (
                             <div
@@ -97,21 +95,19 @@ const FileUploader = () => {
                             + Add File Name
                         </button>
                     </div>
-
-                    {/* Right Side (File Details) */}
                     {fileInputs.length !== 0 && <div className="file-details">
                         <div className="row align-items-center "
-                            onDragOver={(e) => e.preventDefault()} // Prevent default to allow drop
+                            onDragOver={(e) => e.preventDefault()}
                             onDrop={(e) => {
                                 e.preventDefault();
-                                handleFileChange(e.dataTransfer.files[0]); // Handle file drop
+                                handleFileChange(e.dataTransfer.files[0]);
                             }}
                         >
                             <div className="col-md-8 col-sm-12 ms-3 file-upload-container">
                                 <label
                                     className="file-upload-label"
                                     htmlFor="file-input"
-                                    onDragEnter={() => setDragOver(true)} // Visual feedback for drag
+                                    onDragEnter={() => setDragOver(true)}
                                     onDragLeave={() => setDragOver(false)}
                                 >
                                     <div className={`file-upload-content ${dragOver ? "drag-over" : ""}`}>
@@ -147,9 +143,6 @@ const FileUploader = () => {
 
                         <FileDetails activeParticipant={activeParticipant} activeDocumentId={activeDocumentId} />
                     </div>}
-
-
-                    {/* Modal for entering file name */}
                     {showModal && (
                         <div className="file-modal-overlay">
                             <div className="file-modal-content">

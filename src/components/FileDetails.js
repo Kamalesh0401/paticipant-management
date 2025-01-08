@@ -49,7 +49,6 @@ const FileDetails = () => {
                                 <FontAwesomeIcon icon={faFileAlt} />
                             </div>
                             <div className="file-details">
-                                {/* Progress Bar */}
                                 {file.status !== "completed" && <div className="file-progress-container">
                                     <div className="file-progress-bar">
                                         <div

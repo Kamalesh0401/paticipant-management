@@ -142,7 +142,6 @@
     color: white;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .file-upload-button {
         font-size: 0.9rem;
@@ -154,8 +153,6 @@
     }
 }
 
-
-/* Container styling */
 .file-upload-container {
     padding: 15px;
     background-color: #f9f9f9;
@@ -175,7 +172,6 @@
     border-color: #0056b3;
 }
 
-/* File label */
 .file-upload-label {
     display: inline-block;
     width: 100%;
@@ -209,12 +205,10 @@
     color: #0056b3;
 }
 
-/* Input styling */
 .file-input {
     display: none;
 }
 
-/* Cancel button */
 .remove-input-btn {
     background-color: #dc3545;
     color: #fff;

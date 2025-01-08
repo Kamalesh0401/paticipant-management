@@ -1,4 +1,3 @@
-/* File list container */
 .file-list {
     display: flex;
     flex-direction: column;
@@ -7,7 +6,6 @@
     max-width: 100%;
 }
 
-/* Individual file item */
 .file-item {
     display: flex;
     align-items: center;
@@ -23,14 +21,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* File icon */
 .file-icon {
     font-size: 2rem;
     color: #007bff;
     flex-shrink: 0;
 }
 
-/* File details section */
 .file-details {
     flex-grow: 1;
     display: flex;
@@ -38,7 +34,6 @@
     gap: 0.5rem;
 }
 
-/* Progress bar container */
 .file-progress-container {
     display: flex;
     align-items: center;
@@ -46,7 +41,6 @@
     width: 100%;
 }
 
-/* Progress bar background */
 .file-progress-bar {
     background-color: #f1f1f1;
     border-radius: 4px;
@@ -56,7 +50,6 @@
     overflow: hidden;
 }
 
-/* Progress indicator */
 .file-progress {
     background-color: #007bff;
     height: 100%;
@@ -68,7 +61,6 @@
     position: relative;
 }
 
-/* Progress text inside the bar */
 .file-progress-text {
     color: white;
     font-size: 0.75rem;
@@ -77,7 +69,6 @@
     text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
 }
 
-/* Percentage text for narrow progress bars */
 .file-progress-end {
     font-size: 0.85rem;
     color: #131111;
@@ -86,8 +77,6 @@
     flex-shrink: 0;
 }
 
-
-/* File name and info */
 .file-name {
     font-weight: 600;
     font-size: 1rem;
@@ -119,12 +108,10 @@
     transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
-/* Hover effect */
 .upload-btn:hover {
     transform: scale(1.1);
 }
 
-/* Disabled button styling */
 .upload-btn.disabled,
 .upload-btn:disabled {
     background-color: #cccccc;
@@ -149,7 +136,6 @@
     cursor: pointer;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .file-item {
         flex-direction: column;
@@ -163,57 +149,28 @@
     }
 }
 
-/* Base styles for status text */
 .status-text {
     font-weight: bold;
     font-size: 1.1rem;
     transition: color 0.3s ease, transform 0.2s ease-in-out;
 }
 
-/* For the pending status (red color and shaking effect) */
 .pending {
     color: #ff6b6b;
-    animation: shake 0.5s ease-in-out infinite;
 }
 
-/* For the completed status (green color and smooth transition) */
 .completed {
     color: #28a745;
     transform: scale(1.1);
     transition: transform 0.2s ease;
 }
 
-/* For the uploading status (blue color and loading animation) */
 .uploading {
     color: #007bff;
     display: inline-block;
     animation: pulse 1.5s ease-in-out infinite;
 }
 
-/* Shaking animation for pending status */
-@keyframes shake {
-    0% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-5px);
-    }
-
-    50% {
-        transform: translateX(5px);
-    }
-
-    75% {
-        transform: translateX(-5px);
-    }
-
-    100% {
-        transform: translateX(5px);
-    }
-}
-
-/* Pulse animation for uploading status */
 @keyframes pulse {
     0% {
         transform: scale(1);

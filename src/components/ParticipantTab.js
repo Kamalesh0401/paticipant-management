@@ -36,7 +36,6 @@ const ParticipantTab = () => {
 
     return (
         <div className="mt-4 p-5">
-            {/* Add Participant Button */}
             <div className="d-flex justify-content-between mb-3">
                 <h2>Participant management</h2>
                 <button
@@ -47,8 +46,6 @@ const ParticipantTab = () => {
                     Add Participant
                 </button>
             </div>
-
-            {/* Tabs Section */}
             <div className="tabs-container d-flex flex-wrap">
                 {participants.map((participant, index) => (
                     <div
@@ -71,9 +68,6 @@ const ParticipantTab = () => {
                 ))}
                 {participants.length === 0 && <p className="ms-2">No participants available. Add one to get started!</p>}
             </div>
-
-            {/* Active Participant Content */}
-
             {participants.length > 0 && (
                 <div className="active-tab-content mt-4">
                     <h3 className="mb-3">{participants[activeParticipantIndex].name}</h3>
@@ -86,8 +80,6 @@ const ParticipantTab = () => {
                 <div className="mt-5">
                     <FooterNavigation />
                 </div>}
-
-            {/* Add Participant Modal */}
             {isModalOpen && (
                 <AddParticipantModal
                     onSave={(name) => handleAddParticipant(name)}

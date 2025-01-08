@@ -5,7 +5,7 @@ const participantsSlice = createSlice({
   initialState: {
     participants: [],
     activeParticipantIndex: 0,
-    activeDocumentId: null, // Track globally active document
+    activeDocumentId: null,
   },
   reducers: {
     addParticipant: (state, action) => {
@@ -13,7 +13,7 @@ const participantsSlice = createSlice({
         id: Date.now(),
         name: action.payload,
         documents: [],
-        activeDocumentId: null // Track active document for each participant
+        activeDocumentId: null
       };
       state.participants.push(newParticipant);
       state.activeParticipantIndex = state.participants.length - 1;
@@ -32,7 +32,6 @@ const participantsSlice = createSlice({
     },
     setActiveParticipant: (state, action) => {
       state.activeParticipantIndex = action.payload;
-      // Update global active document to match active participant's active document
       const activeParticipant = state.participants[action.payload];
       if (activeParticipant) {
         state.activeDocumentId = activeParticipant.activeDocumentId;
@@ -53,8 +52,6 @@ const participantsSlice = createSlice({
             files: []
           };
           participant.documents.push(newDocument);
-
-          // Set as active document if it's the first one
           if (participant.documents.length === 1) {
             participant.activeDocumentId = newDocument.id;
             if (state.participants[state.activeParticipantIndex].id === participantId) {
@@ -78,7 +75,6 @@ const participantsSlice = createSlice({
       const { participantId, documentId } = action.payload;
       const participant = state.participants.find(p => p.id === participantId);
       if (participant) {
-        // If removing active document, set another one as active
         if (participant.activeDocumentId === documentId) {
           const remainingDocs = participant.documents.filter(
             doc => doc.id !== documentId

@@ -102,7 +102,6 @@
     color: #c82333;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .participant-modal-content {
         width: 85%;
