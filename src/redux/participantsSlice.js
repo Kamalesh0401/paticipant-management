@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuid } from 'uuid';
 
 const participantsSlice = createSlice({
   name: 'participants',
@@ -40,7 +39,7 @@ const participantsSlice = createSlice({
       }
     },
     addDocument: (state, action) => {
-      const { participantId, documentName } = action.payload;
+      const { participantId, documentName, id } = action.payload;
       const participant = state.participants.find(p => p.id === participantId);
       if (participant) {
         const documentExists = participant.documents.some(
@@ -49,7 +48,7 @@ const participantsSlice = createSlice({
 
         if (!documentExists) {
           const newDocument = {
-            id: uuid(),
+            id: id,
             name: documentName,
             files: []
           };
@@ -66,16 +65,16 @@ const participantsSlice = createSlice({
       }
     },
     setActiveDocument: (state, action) => {
+      console.log("Before update:", state);
       const { participantId, documentId } = action.payload;
       const participant = state.participants.find(p => p.id === participantId);
-      console.log("setActiveDocument state", state);
-      console.log("setActiveDocument participant.documents", participant.documents);
       if (participant && participant.documents.some(doc => doc.id === documentId)) {
         participant.activeDocumentId = documentId;
         if (state.participants[state.activeParticipantIndex].id === participantId) {
           state.activeDocumentId = documentId;
         }
       }
+      console.log("After update:", state);
     },
     removeDocument: (state, action) => {
       const { participantId, documentId } = action.payload;
@@ -98,13 +97,13 @@ const participantsSlice = createSlice({
       }
     },
     addFile: (state, action) => {
-      const { participantId, documentId, file } = action.payload;
+      const { participantId, documentId, file, id } = action.payload;
       const participant = state.participants.find(p => p.id === participantId);
       if (participant) {
         const document = participant.documents.find(doc => doc.id === documentId);
         if (document) {
           document.files.push({
-            id: uuid(),
+            id: id,
             name: file.name,
             size: file.size,
             type: file.type,
@@ -158,38 +157,3 @@ export const {
 } = participantsSlice.actions;
 
 export default participantsSlice.reducer;
-
-
-
-
-
-
-
-
-
-
-
-//Example Use
-
-// // Add a participant
-// dispatch(addParticipant('John Doe'));
-
-// // Add a document (automatically becomes active if it's the first one)
-// dispatch(addDocument({
-//     participantId: participantId,
-//     documentName: 'Medical Records'
-// }));
-
-// // Set a specific document as active
-// dispatch(setActiveDocument({
-//     participantId: participantId,
-//     documentId: documentId
-// }));
-
-// // Access active document in your component
-// const { activeDocumentId } = useSelector(state => state.participants);
-// // or for specific participant
-// const participant = useSelector(state =>
-//     state.participants.participants.find(p => p.id === participantId)
-// );
-// const activeDoc = participant.documents.find(d => d.id === participant.activeDocumentId);

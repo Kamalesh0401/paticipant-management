@@ -1,0 +1,176 @@
+/* File list container */
+.file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    max-width: 100%;
+}
+
+/* Individual file item */
+.file-item {
+    display: flex;
+    align-items: center;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    gap: 1rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.file-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* File icon */
+.file-icon {
+    font-size: 2rem;
+    color: #007bff;
+    flex-shrink: 0;
+}
+
+/* File details section */
+.file-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Progress bar container */
+.file-progress-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+/* Progress bar background */
+.file-progress-bar {
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    height: 8px;
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Progress indicator */
+.file-progress {
+    background-color: #007bff;
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Progress text inside the bar */
+.file-progress-text {
+    color: white;
+    font-size: 0.75rem;
+    position: absolute;
+    right: 5px;
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Percentage text for narrow progress bars */
+.file-progress-end {
+    font-size: 0.85rem;
+    color: #131111;
+    min-width: 30px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+
+/* File name and info */
+.file-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #333;
+}
+
+.file-info {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Action buttons */
+.file-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.upload-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hover effect */
+.upload-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Disabled button styling */
+.upload-btn.disabled,
+.upload-btn:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.remove-file-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.remove-file-btn:hover {
+    background: #a71d2a;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.pending {
+    color: red;
+}
+
+.completed {
+    color: green;
+}
+
+.uploading {
+    color: blue;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .file-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .file-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

@@ -23,21 +23,27 @@ const FooterNavigation = () => {
 
     return (
         <div className="footer-navigation">
-            <button
-                className="nav-btn back-btn"
-                onClick={() => handleNavigation('back')}
-                disabled={activeParticipantIndex === 0}
-            >
-                <FontAwesomeIcon icon={faArrowLeft} className="me-3" />Back
-            </button>
-            <button
-                className="nav-btn next-btn"
-                onClick={() => handleNavigation('next')}
-                disabled={activeParticipantIndex === participants.length - 1}
-            >
-                Next
-                <FontAwesomeIcon icon={faArrowRight} className="ms-3" />
-            </button>
+            <div className="d-flex justify-content-between">
+                <div className="align-item-start">
+                    <button
+                        className="nav-btn back-btn"
+                        onClick={() => handleNavigation('back')}
+                        disabled={activeParticipantIndex === 0}
+                    >
+                        <FontAwesomeIcon icon={faArrowLeft} className="me-3" />Back
+                    </button>
+                </div>
+                <div className="align-item-end">
+                    <button
+                        className="nav-btn next-btn"
+                        onClick={() => handleNavigation('next')}
+                        disabled={activeParticipantIndex === participants.length - 1}
+                    >
+                        Next
+                        <FontAwesomeIcon icon={faArrowRight} className="ms-3" />
+                    </button>
+                </div>
+            </div>
         </div>
     );
 };

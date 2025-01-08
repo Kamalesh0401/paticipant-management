@@ -1,7 +1,8 @@
 /* Tabs Container */
 .tabs-container {
     background-color: #f8f9fa;
-    border-bottom: 2px solid #ddd;
+    /* border-bottom: 2px solid #ddd; */
+    border: 2px solid #ddd;
     overflow-x: auto;
     white-space: nowrap;
     padding: 10px 0;
@@ -15,7 +16,8 @@
     padding: 10px 20px;
     background-color: #ffffff;
     border: 1px solid #ddd;
-    border-radius: 8px 8px 0 0;
+    /* border-radius: 8px 8px 0 0; */
+    border-radius: 8px;
     margin-right: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
