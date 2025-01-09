@@ -47,7 +47,7 @@ const ParticipantTab = () => {
                         Add Participant
                     </button>
                 </div>
-                <div className="tabs-container d-flex flex-wrap">
+                <div className={`${participants.length === 0 ? 'no-tabs-container' : 'tabs-container'} d-flex flex-wrap`}>
                     {participants.map((participant, index) => (
                         <div
                             key={participant.id}

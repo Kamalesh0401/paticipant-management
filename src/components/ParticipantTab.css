@@ -49,6 +49,14 @@ z.participant {
     padding: 10px;
 }
 
+.no-tabs-container {
+    background-color: #f8f9fa;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    overflow-x: auto;
+    padding: 10px;
+}
+
 .tab-item {
     display: inline-flex;
     align-items: center;
@@ -184,11 +192,3 @@ z.participant {
         padding: 10px;
     }
 }
-
-/* 
-@media (max-width: 480px) {
-
-    .participant-container {
-       
-    }
-} */
