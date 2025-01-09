@@ -8,7 +8,7 @@ import {
 } from '../redux/participantsSlice';
 import FileDetails from "./FileDetails";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import "./FileUploader.css";
 
 const FileUploader = () => {
@@ -126,7 +126,7 @@ const FileUploader = () => {
                             </div>
                         ))}
                         <button className="add-file-btn" onClick={handleAddFileInput}>
-                            + Add File Name
+                            <FontAwesomeIcon icon={faPlus} /> Add File Name
                         </button>
                     </div>
                     {(fileInputs.length !== 0) ?
