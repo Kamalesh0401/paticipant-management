@@ -76,12 +76,13 @@ const FileDetails = () => {
                                 <button
                                     className={`upload-btn ${file.status === "completed" ? "disabled" : ""}`}
                                     onClick={(e) => handleUploadFile(file.id, e)}
-                                    disabled={file.status === "completed"}
+                                    disabled={(file.status === "completed") || (file.status === "uploading")}
                                 >
-                                    Upload <FontAwesomeIcon icon={faUpload} className="ms-3" />
+                                    Upload <FontAwesomeIcon icon={faUpload} />
                                 </button>
                                 <button
-                                    className="remove-file-btn"
+                                    className={`remove-file-btn ${file.status === "uploading" ? "disabled" : ""}`}
+                                    disabled={file.status === "uploading"}
                                     onClick={() =>
                                         dispatch(
                                             removeFile({
@@ -92,7 +93,7 @@ const FileDetails = () => {
                                         )
                                     }
                                 >
-                                    Remove <FontAwesomeIcon icon={faTrash} className="ms-3" />
+                                    Remove <FontAwesomeIcon icon={faTrash} />
                                 </button>
                             </div>
                         </div>
@@ -100,7 +101,7 @@ const FileDetails = () => {
                 ) : (
                     <div className="no-files">No files uploaded yet.</div>
                 )}
-            </div>
+            </div >
 
         </>
 

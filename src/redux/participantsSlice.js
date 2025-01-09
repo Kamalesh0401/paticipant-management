@@ -95,6 +95,7 @@ const participantsSlice = createSlice({
       const participant = state.participants.find(p => p.id === participantId);
       if (participant) {
         const document = participant.documents.find(doc => doc.id === documentId);
+        document.files = [];
         if (document) {
           document.files.push({
             id: id,

@@ -7,20 +7,24 @@
 }
 
 .file-tabs {
-    width: 200px;
-    padding: 16px;
     border-right: 1px solid #ddd;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     gap: 10px;
+    padding-right: 15px;
+    box-sizing: border-box;
 }
 
 .file-tab {
-    padding: 8px;
-    background-color: #f1f1f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #f0f0f0;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    margin-top: 8px;
 }
 
 .file-tab.selected {
@@ -28,23 +32,43 @@
     color: white;
 }
 
-.file-tabs .add-file-btn {
-    padding: 8px;
-    border: none;
-    background-color: #28a745;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.file-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: inherit;
+    flex-grow: 1;
+    text-align: start;
 }
 
-.file-tabs .add-file-btn:hover {
-    background-color: #218838;
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 16px;
+}
+
+.delete-red-btn {
+    color: #ff4d4f;
+}
+
+.add-file-btn {
+    margin-top: 8px;
+    padding: 10px 15px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.add-file-btn:hover {
+    background-color: #45a049;
 }
 
 .file-details {
-    flex: 1;
     padding: 16px;
+    margin-left: 8px;
 }
 
 .file-details-info {
@@ -159,7 +183,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
-    border: 2px dashed #007bff;
+    border: 3px dashed #007bff;
 }
 
 .file-upload-container:hover {
@@ -189,6 +213,7 @@
 }
 
 .plus-icon {
+    margin-right: 32px;
     font-size: 24px;
     color: #007bff;
     margin-bottom: 10px;

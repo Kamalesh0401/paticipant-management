@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import './AddParticipantModel.css';
@@ -15,6 +15,11 @@ const AddParticipantModal = ({ onSave, onCancel }) => {
         }
     };
 
+    useEffect(() => {
+        if (inputRef && inputRef.current)
+            setFocus();
+    }, []);
+
     const setFocus = () => {
         inputRef.current.focus()
     }
@@ -23,7 +28,7 @@ const AddParticipantModal = ({ onSave, onCancel }) => {
             <div className="participant-modal-content">
                 <h3>Add Participant</h3>
                 <button type="button" className="close-btn" onClick={onCancel}>
-                    <FontAwesomeIcon icon={faTimes} className="me-0" />
+                    <FontAwesomeIcon icon={faTimes} />
                 </button>
                 <input
                     type="text"

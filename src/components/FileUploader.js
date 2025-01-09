@@ -35,29 +35,43 @@ const FileUploader = () => {
     const handleAddFileInput = () => {
         setShowModal(true);
     };
+    useEffect(() => {
+        if (inputRef && inputRef.current)
+            setFocus();
+    }, [showModal]);
 
     const setFocus = () => {
-        inputRef.current.focus()
+        if (inputRef && inputRef.current)
+            inputRef.current.focus()
     }
 
     const handleSaveFileName = () => {
         if (fileName) {
-            const newDocument = {
-                id: Date.now(),
-                file: null,
-                name: fileName,
-                uploading: false,
-                progress: 0,
-                files: [],
-            };
-            setFileInputs([
-                ...fileInputs,
-                newDocument,
-            ]);
-            dispatch(addDocument({ participantId: activeParticipant.id, documentName: newDocument.name, id: newDocument.id }));
-            dispatch(setActiveDocument({ participantId: activeParticipant.id, documentId: newDocument.id }));
-            setFileName("");
-            setShowModal(false);
+            const documentExists = activeParticipant.documents.some(
+                doc => doc.name.toLowerCase() === fileName.toLowerCase()
+            );
+            if (!documentExists) {
+                const newDocument = {
+                    id: Date.now(),
+                    file: null,
+                    name: fileName,
+                    uploading: false,
+                    progress: 0,
+                    files: [],
+                };
+                setFileInputs([
+                    ...fileInputs,
+                    newDocument,
+                ]);
+                dispatch(addDocument({ participantId: activeParticipant.id, documentName: newDocument.name, id: newDocument.id }));
+                dispatch(setActiveDocument({ participantId: activeParticipant.id, documentId: newDocument.id }));
+                setFileName("");
+                setShowModal(false);
+            }
+            else {
+                alert("File name already exists!");
+                setFocus();
+            }
         } else {
             alert("File name cannot be empty!");
             setFocus();
@@ -65,9 +79,7 @@ const FileUploader = () => {
     };
 
     const handleFileChange = (rawFile) => {
-        console.log("handleFileChange addFile if: ", rawFile);
         if (rawFile) {
-            console.log("handleFileChange addFile : ", rawFile);
             const file = {
                 name: rawFile.name,
                 size: rawFile.size,
@@ -86,69 +98,80 @@ const FileUploader = () => {
                             <div
                                 key={input.id}
                                 className={`file-tab ${activeDocumentId === input.id ? "selected" : ""}`}
-                                onClick={() => dispatch(setActiveDocument({ participantId: activeParticipant.id, documentId: input.id }))}
+                                onClick={() =>
+                                    dispatch(
+                                        setActiveDocument({
+                                            participantId: activeParticipant.id,
+                                            documentId: input.id,
+                                        })
+                                    )
+                                }
                             >
-                                {input.name || "Untitled"}
+                                <span className="file-name">{input.name || "Untitled"}</span>
+                                <button
+                                    className={`delete-btn ${activeDocumentId === input.id ? "delete-white-btn" : "delete-red-btn"
+                                        }`}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        dispatch(
+                                            removeDocument({
+                                                participantId: activeParticipant.id,
+                                                documentId: input.id,
+                                            })
+                                        );
+                                    }}
+                                >
+                                    <FontAwesomeIcon icon={faTimes} />
+                                </button>
                             </div>
                         ))}
                         <button className="add-file-btn" onClick={handleAddFileInput}>
                             + Add File Name
                         </button>
                     </div>
-                    {fileInputs.length !== 0 && <div className="file-details">
-                        <div className="row align-items-center "
-                            onDragOver={(e) => e.preventDefault()}
-                            onDrop={(e) => {
-                                e.preventDefault();
-                                handleFileChange(e.dataTransfer.files[0]);
-                            }}
-                        >
-                            <div className="col-md-8 col-sm-12 ms-3 file-upload-container">
-                                <label
-                                    className="file-upload-label"
-                                    htmlFor="file-input"
-                                    onDragEnter={() => setDragOver(true)}
-                                    onDragLeave={() => setDragOver(false)}
-                                >
-                                    <div className={`file-upload-content ${dragOver ? "drag-over" : ""}`}>
-                                        <FontAwesomeIcon icon={faDownload} className="me-2 plus-icon" />
-                                        <span className="choose-label">
-                                            Select a file or drag it here
-                                        </span>
-                                    </div>
-                                </label>
-                                <input
-                                    id="file-input"
-                                    type="file"
-                                    onChange={(e) => handleFileChange(e.target.files[0])}
-                                    className="file-input"
-                                />
+                    {(fileInputs.length !== 0) ?
+                        <div className="row file-details">
+                            <div className="align-items-center "
+                                onDragOver={(e) => e.preventDefault()}
+                                onDrop={(e) => {
+                                    e.preventDefault();
+                                    handleFileChange(e.dataTransfer.files[0]);
+                                }}
+                            >
+                                <div className="file-upload-container">
+                                    <label
+                                        className="file-upload-label"
+                                        htmlFor="file-input"
+                                        onDragEnter={() => setDragOver(true)}
+                                        onDragLeave={() => setDragOver(false)}
+                                    >
+                                        <div className={`file-upload-content ${dragOver ? "drag-over" : ""}`}>
+                                            <FontAwesomeIcon icon={faDownload} className="plus-icon" />
+                                            <span className="choose-label">
+                                                Select a file or drag it here
+                                            </span>
+                                        </div>
+                                    </label>
+                                    <input
+                                        id="file-input"
+                                        type="file"
+                                        onChange={(e) => handleFileChange(e.target.files[0])}
+                                        className="file-input"
+                                    />
+                                </div>
                             </div>
-                            <div className="col-md-3 col-sm-12 text-center mt-2 mt-md-0">
-                                <button
-                                    className="remove-input-btn"
-                                    onClick={() =>
-                                        dispatch(
-                                            removeDocument({
-                                                participantId: activeParticipant.id,
-                                                documentId: activeDocumentId,
-                                            })
-                                        )
-                                    }
-                                >
-                                    Cancel<FontAwesomeIcon icon={faTimes} className="ms-1" />
-                                </button>
-                            </div>
+                            <FileDetails activeParticipant={activeParticipant} activeDocumentId={activeDocumentId} />
+                        </div> :
+                        <div className="row file-details">
+                            <p>No documents available</p>
                         </div>
-
-                        <FileDetails activeParticipant={activeParticipant} activeDocumentId={activeDocumentId} />
-                    </div>}
+                    }
                     {showModal && (
                         <div className="file-modal-overlay">
                             <div className="file-modal-content">
                                 <h3>Add File Name</h3>
                                 <button type="button" className="close-btn" onClick={() => setShowModal(false)}>
-                                    <FontAwesomeIcon icon={faTimes} className="me-0" />
+                                    <FontAwesomeIcon icon={faTimes} />
                                 </button>
                                 <input
                                     type="text"
@@ -171,7 +194,9 @@ const FileUploader = () => {
                     )}
                 </>
             ) : (
-                <p>Please select or add a participant to manage files.</p>
+                <div className="file-tabs">
+                    <p>Please select or add a participant to manage files.</p>
+                </div>
             )}
         </div>
     );

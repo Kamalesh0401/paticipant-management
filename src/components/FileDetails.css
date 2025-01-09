@@ -4,6 +4,7 @@
     gap: 1rem;
     padding: 1rem;
     max-width: 100%;
+    box-sizing: border-box;
 }
 
 .file-item {
@@ -15,6 +16,7 @@
     padding: 1rem;
     gap: 1rem;
     transition: box-shadow 0.3s ease;
+    flex-wrap: wrap;
 }
 
 .file-item:hover {
@@ -32,6 +34,8 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    max-width: calc(100% - 100px);
+    box-sizing: border-box;
 }
 
 .file-progress-container {
@@ -55,18 +59,7 @@
     height: 100%;
     border-radius: 4px;
     transition: width 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
-}
-
-.file-progress-text {
-    color: white;
-    font-size: 0.75rem;
-    position: absolute;
-    right: 5px;
-    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
 }
 
 .file-progress-end {
@@ -81,6 +74,7 @@
     font-weight: 600;
     font-size: 1rem;
     color: #333;
+    word-wrap: break-word;
 }
 
 .file-info {
@@ -88,10 +82,15 @@
     color: #666;
 }
 
-/* Action buttons */
 .file-actions {
     display: flex;
     gap: 0.5rem;
+}
+
+.upload-btn,
+.remove-file-btn {
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .upload-btn {
@@ -102,14 +101,11 @@
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: background-color 0.3s ease, opacity 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .upload-btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .upload-btn.disabled,
@@ -117,6 +113,7 @@
     background-color: #cccccc;
     color: #666666;
     cursor: not-allowed;
+    transform: scale(1);
 }
 
 .remove-file-btn {
@@ -127,26 +124,20 @@
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .remove-file-btn:hover {
     background: #a71d2a;
-    transform: scale(1.1);
-    cursor: pointer;
+    transform: scale(1.05);
 }
 
-@media (max-width: 768px) {
-    .file-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-
-    .file-actions {
-        width: 100%;
-        justify-content: space-between;
-    }
+.remove-file-btn.disabled,
+.remove-file-btn:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    transform: scale(1);
 }
 
 .status-text {
@@ -171,16 +162,56 @@
     animation: pulse 1.5s ease-in-out infinite;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
+/* Responsive design for different screen sizes */
+@media (max-width: 768px) {
+    .file-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
     }
 
-    50% {
-        transform: scale(1.1);
+    .file-actions {
+        width: 100%;
+        justify-content: space-between;
     }
 
-    100% {
-        transform: scale(1);
+    .upload-btn,
+    .remove-file-btn {
+        flex: 1 1 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .file-item {
+        padding: 0.8rem;
+        gap: 0.5rem;
+    }
+
+    .file-icon {
+        font-size: 1.5rem;
+    }
+
+    .file-details {
+        max-width: calc(100% - 50px);
+        gap: 0.4rem;
+    }
+
+    .file-name {
+        font-size: 0.9rem;
+    }
+
+    .file-info {
+        font-size: 0.8rem;
+    }
+
+    .upload-btn,
+    .remove-file-btn {
+        font-size: 0.8rem;
+        padding: 0.4rem;
+        flex: 1 1 45%;
+    }
+
+    .file-progress-bar {
+        height: 6px;
     }
 }

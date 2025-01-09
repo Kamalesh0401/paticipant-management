@@ -1,22 +1,33 @@
 .footer-navigation {
+    width: 100%;
     background-color: #f1f1f1;
     border-top: 1px solid #ddd;
-    padding: 16px;
+    padding: 8px;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
     bottom: 0;
-    width: 95%;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    box-sizing: border-box;
 }
 
+/* Buttons */
 .nav-btn {
     padding: 10px 20px;
     font-size: 16px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
+/* Back button styles */
 .back-btn {
     background-color: #6c757d;
     color: white;
@@ -27,6 +38,7 @@
     cursor: not-allowed;
 }
 
+/* Next button styles */
 .next-btn {
     background-color: #007bff;
     color: white;
@@ -37,16 +49,46 @@
     cursor: not-allowed;
 }
 
+/* Hover effect for buttons */
+.nav-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+}
+
+/* Responsive styles */
 @media (max-width: 768px) {
     .footer-navigation {
-        flex-direction: column;
-        gap: 8px;
+        /* flex-direction: column; */
+        padding: 12px;
     }
 
     .nav-btn {
         width: 100%;
         text-align: center;
         font-size: 14px;
-        padding: 8px 16px;
+        padding: 10px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .footer-navigation {
+        padding: 16px 24px;
+        gap: 20px;
+    }
+
+    .nav-btn {
+        font-size: 15px;
+        padding: 12px 20px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .footer-navigation {
+        padding: 16px 12px;
+        gap: 24px;
+    }
+
+    .nav-btn {
+        font-size: 16px;
+        padding: 12px 24px;
     }
 }
