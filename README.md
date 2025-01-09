@@ -2,6 +2,11 @@
 
 This application allows you to manage multiple participants, their details, and file uploads. Each participant is represented by a tab where you can add, view, and delete participant details. You can also upload files for each participant and manage them accordingly.
 
+## Deployment
+
+The application is hosted on Netlify.
+- **Live Application**: https://participantpro.netlify.app/
+  
 ## Features
 
 ### 1. Participant Management
@@ -20,7 +25,6 @@ This application allows you to manage multiple participants, their details, and 
 ### 3. Hosting and Submission
 - **Git Repository**: The source code is hosted on GitHub.
 - **Hosted Application**: The application is deployed on Netlify.
-- Links to both the GitHub repository and live hosted application are provided for evaluation.
 
 ## Installation
 
@@ -46,9 +50,3 @@ This application allows you to manage multiple participants, their details, and 
    
 
 Open http://localhost:3000 to view the application in the browser.
-
-## Deployment
-
-The application is hosted on Netlify.
-- **Git Repository**: https://github.com/Kamalesh0401/paticipant-management.git
-- **Live Application**: https://participantpro.netlify.app/
